@@ -125,7 +125,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p "${{ GITHUB_WORKSPACE }}"/artifacts
-          cp "${{ env.FINALGO }}"/bin/rclone "${{ GITHUB_WORKSPACE }}"/artifacts
+          cp -av "${{ env.FINALGO }}"/bin/rclone "${{ GITHUB_WORKSPACE }}"/artifacts
 
       # - name: Run tests
       #   shell: bash
@@ -154,7 +154,8 @@ jobs:
       #   if: matrix.compile_all
 
       - name: Upload artifacts
-        uses: actions/checkout@v2
+        uses: actions/upload-artifact@v2
         with:
           name: rclone
           path: "${{ GITHUB_WORKSPACE }}"/artifacts/rclone
+
