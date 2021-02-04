@@ -58,15 +58,20 @@ jobs:
           echo "FINALGO=`go env GOPATH`" >> $GITHUB_ENV
           if [[ "${{ matrix.goarch }}" != "" ]]; then echo 'GOARCH=${{ matrix.goarch }}' >> $GITHUB_ENV ; fi
           if [[ "${{ matrix.cgo }}" != "" ]]; then echo 'CGO_ENABLED=${{ matrix.cgo }}' >> $GITHUB_ENV ; fi
-
-      - name: Install Libraries on Linux
+          
+      - name: Test environment variables
         shell: bash
         run: |
-          sudo modprobe fuse
-          sudo chmod 666 /dev/fuse
-          sudo chown root:$USER /etc/fuse.conf
-          sudo apt-get install fuse libfuse-dev rpm pkg-config
-        if: matrix.os == 'ubuntu-latest'
+          echo "${{ env.FINALGO }}"
+
+      # - name: Install Libraries on Linux
+      #   shell: bash
+      #   run: |
+      #     sudo modprobe fuse
+      #     sudo chmod 666 /dev/fuse
+      #     sudo chown root:$USER /etc/fuse.conf
+      #     sudo apt-get install fuse libfuse-dev rpm pkg-config
+      #   if: matrix.os == 'ubuntu-latest'
 
       # - name: Install Libraries on macOS
       #   shell: bash
