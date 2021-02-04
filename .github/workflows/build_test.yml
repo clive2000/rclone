@@ -140,7 +140,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: rclone_build
+          name: rclone_build_${{ matrix.job_name }}
           path: ${{ github.workspace }}/artifacts/
 
 
