@@ -124,8 +124,8 @@ jobs:
       - name: Move rclone to workspace folder
         shell: bash
         run: |
-          mkdir -p "${{ GITHUB_WORKSPACE }}"/artifacts
-          cp -av "${{ env.FINALGO }}"/bin/rclone "${{ GITHUB_WORKSPACE }}"/artifacts
+          mkdir -p "${{ github.workspace }}"/artifacts
+          cp -av "${{ env.FINALGO }}"/bin/rclone "${{ github.workspace }}"/artifacts
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
