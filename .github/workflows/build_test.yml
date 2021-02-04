@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        job_name: ['linux']
+        job_name: ['linux','windows_amd64']
 
         include:
           - job_name: linux
@@ -29,6 +29,16 @@ jobs:
             gotags: cmount
             build_flags: '-include "^linux/"'
             check: true
+            quicktest: true
+            racequicktest: true
+            deploy: true
+
+          - job_name: windows_amd64
+            os: windows-latest
+            go: '1.15.x'
+            gotags: cmount
+            build_flags: '-include "^windows/amd64" -cgo'
+            build_args: '-buildmode exe'
             quicktest: true
             racequicktest: true
             deploy: true
@@ -130,8 +140,8 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: rclone
-          path: ${{ github.workspace }}/artifacts/rclone
+          name: rclone_build
+          path: ${{ github.workspace }}/artifacts/
 
 
       # - name: Run tests
