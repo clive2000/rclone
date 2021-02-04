@@ -736,7 +736,7 @@ func (f *Fs) changeSvc(){
 	 */
 	loadedCreds, _ := ioutil.ReadFile(os.ExpandEnv(opt.ServiceAccountFile))
 	opt.ServiceAccountCredentials = string(loadedCreds)
-	oAuthClient, err := getServiceAccountClient(opt, []byte(opt.ServiceAccountCredentials))
+	oAuthClient, err := getServiceAccountClient(context.Background(), opt, []byte(opt.ServiceAccountCredentials))
 	if err != nil {
 		errors.Wrap(err, "failed to create oauth client from service account")
 	}
