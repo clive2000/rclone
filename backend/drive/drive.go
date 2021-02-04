@@ -18,7 +18,6 @@ import (
 	"math/rand"
 	"mime"
 	"net/http"
-	"net/url"
 	"os"
 	"path"
 	"sort"
@@ -1150,7 +1149,6 @@ func newFs(ctx context.Context, name, path string, m configmap.Mapper) (*Fs, err
 	opt := new(Options)
 	err := configstruct.Set(m, opt)
 	//-----------------------------------------------------------
-	maybeIsFile := false
 	// 添加  {id} 作为根目录功胿
 	if(path != "" && path[0:1] == "{"){
 		idIndex := strings.Index(path,"}")
@@ -1159,7 +1157,6 @@ func newFs(ctx context.Context, name, path string, m configmap.Mapper) (*Fs, err
 			name += RootId
 			//opt.ServerSideAcrossConfigs = true
 			if(len(RootId) == 33){
-				maybeIsFile = true
 				opt.RootFolderID = RootId;
 			}else{
 				opt.RootFolderID = RootId;
