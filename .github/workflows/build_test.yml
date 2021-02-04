@@ -121,34 +121,40 @@ jobs:
         run: |
           make
 
-      - name: Run tests
+      - name: Move rclone to workspace folder
         shell: bash
         run: |
-          make quicktest
-        if: matrix.quicktest
+          mkdir -p "${{ GITHUB_WORKSPACE }}"/artifacts
+          cp "${{ env.FINALGO }}"/bin/rclone "${{ GITHUB_WORKSPACE }}"/artifacts
 
-      - name: Race test
-        shell: bash
-        run: |
-          make racequicktest
-        if: matrix.racequicktest
+      # - name: Run tests
+      #   shell: bash
+      #   run: |
+      #     make quicktest
+      #   if: matrix.quicktest
 
-      - name: Code quality test
-        shell: bash
-        run: |
-          make build_dep
-          make check
-        if: matrix.check
+      # - name: Race test
+      #   shell: bash
+      #   run: |
+      #     make racequicktest
+      #   if: matrix.racequicktest
 
-      - name: Compile all architectures test
-        shell: bash
-        run: |
-          make
-          make compile_all
-        if: matrix.compile_all
+      # - name: Code quality test
+      #   shell: bash
+      #   run: |
+      #     make build_dep
+      #     make check
+      #   if: matrix.check
+
+      # - name: Compile all architectures test
+      #   shell: bash
+      #   run: |
+      #     make
+      #     make compile_all
+      #   if: matrix.compile_all
 
       - name: Upload artifacts
         uses: actions/checkout@v2
         with:
           name: rclone
-          path: ${{ env.FINALGO }}/bin/rclone
+          path: "${{ GITHUB_WORKSPACE }}"/artifacts/rclone
