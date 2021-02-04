@@ -131,7 +131,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: rclone
-          path: ${{ GITHUB_WORKSPACE }}/artifacts/rclone
+          path: ${{ github.workspace }}/artifacts/rclone
 
 
       # - name: Run tests
