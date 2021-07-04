@@ -3,6 +3,7 @@
 # Test build and upload artifacts
 # -*- compile-command: "yamllint -f parsable build.yml" -*-
 
+# Workflow file to upload artifact for windows and linux amd64
 name: build_test
 
 # Trigger the workflow on push or pull request
